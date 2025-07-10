@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+    }
+    input {
+      padding: 10px;
+      width: 200px;
+    }
+    button {
+      padding: 10px 15px;
+      margin-left: 10px;
+    }
+    ul {
+      margin-top: 20px;
+      padding-left: 0;
+    }
+    li {
+      list-style: none;
+      padding: 10px;
+      background: #f0f0f0;
+      margin-bottom: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    li:hover {
+      background: #d4f0ff;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📝 To-Do List</h2>
+  <input type="text" id="taskInput" placeholder="Enter task" />
+  <button onclick="addTask()">Add</button>
+
+  <ul id="taskList"></ul>
+
+  <script>
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const taskText = input.value.trim();
+
+      if (taskText === "") {
+        alert("Please enter a task.");
+        return;
+      }
+
+      const li = document.createElement("li");
+      li.innerText = taskText;
+
+      // Remove task on click
+      li.onclick = function () {
+        li.remove();
+      };
+
+      document.getElementById("taskList").appendChild(li);
+      input.value = ""; // clear input
+    }
+  </script>
+
+</body>
+</html>
