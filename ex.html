@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Details Viewer</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+      color: darkblue;
+      white-space: pre-line;
+    }
+    button {
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🎓 Student Details Viewer</h2>
+  <button onclick="showDetails()">Show Student Info</button>
+  <div id="output"></div>
+
+  <script>
+    function showDetails() {
+      const student = {
+        name: "Shubham",
+        age: 18,
+        branch: "AI & ML",
+        college: "GP Sambhajinagar"
+      };
+
+      let result = "Student Details:\n";
+
+      for (let key in student) {
+        result += `${key}: ${student[key]}\n`;
+      }
+
+      document.getElementById("output").innerText = result;
+    }
+  </script>
+
+</body>
+</html>

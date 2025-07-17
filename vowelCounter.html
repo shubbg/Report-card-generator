@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+        body {
+            font-family: arial;
+            padding: 20px;
+        }
+
+        input,button {
+            padding: 10px;
+            margin:10px 0;
+            width: 300PX;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Vowel Counter App</h2>
+    <input type="text" id="textinput" placeholder="enter sentence"> <br>
+    <button onclick="countvowels()">Count Vowels</button>
+    <div id="output"></div>
+
+    <script>
+        function countvowels() {
+            const input=document.getElementById("textinput").value;
+            const vowels="aeiouAEIOU";
+            let count=0;
+            let found=[];
+
+            for(let char of input) {
+                if(vowels.includes(char))
+            {
+                count++;
+                found.push(char);
+            }
+            }
+
+            document.getElementById("output").innerText=`total vowels:${count} \nvowels found:${found.join(",")}`;
+        }
+    </script>
+</body>
+</html>
