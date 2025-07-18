@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Report Card</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f0f4f8;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .output {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e8f4ff;
+      border-left: 4px solid #007bff;
+      border-radius: 8px;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🎓 Student Report Card Generator</h2>
+
+  <div class="container">
+    <label>Name:</label>
+    <input type="text" id="name">
+
+    <label>Roll Number:</label>
+    <input type="number" id="rollNo">
+
+    <label>Enter marks for 5 subjects:</label>
+    <input type="number" id="mark1" placeholder="Subject 1">
+    <input type="number" id="mark2" placeholder="Subject 2">
+    <input type="number" id="mark3" placeholder="Subject 3">
+    <input type="number" id="mark4" placeholder="Subject 4">
+    <input type="number" id="mark5" placeholder="Subject 5">
+
+    <button onclick="generateReport()">Generate Report</button>
+
+    <div class="output" id="output"></div>
+  </div>
+
+  <script>
+    class Student {
+      constructor(name, rollNo, marks) {
+        this.name = name;
+        this.rollNo = rollNo;
+        this.marks = marks;
+      }
+
+      getTotal() {
+        return this.marks.reduce((sum, m) => sum + m, 0);
+      }
+
+      getAverage() {
+        return this.getTotal() / this.marks.length;
+      }
+
+      getReport() {
+        return `
+          <strong>Report Card for ${this.name} (Roll No: ${this.rollNo})</strong><br>
+          Marks: ${this.marks.join(", ")}<br>
+          Total: ${this.getTotal()}<br>
+          Average: ${this.getAverage().toFixed(2)}
+        `;
+      }
+    }
+
+    function generateReport() {
+      let name = document.getElementById("name").value;
+      let rollNo = document.getElementById("rollNo").value;
+      let marks = [
+        parseFloat(document.getElementById("mark1").value),
+        parseFloat(document.getElementById("mark2").value),
+        parseFloat(document.getElementById("mark3").value),
+        parseFloat(document.getElementById("mark4").value),
+        parseFloat(document.getElementById("mark5").value)
+      ];
+
+      // Check if any mark is invalid (NaN, less than 0, or greater than 100)
+      let invalidMark = marks.find(m => isNaN(m) || m < 0 || m > 100);
+      if (invalidMark !== undefined) {
+        document.getElementById("output").innerHTML =
+          `<div class="error">❌ Error: All marks must be between 0 and 100.</div>`;
+        return;
+      }
+
+      // Create and show report
+      let student = new Student(name, rollNo, marks);
+      document.getElementById("output").innerHTML = student.getReport();
+    }
+  </script>
+
+</body>
+</html>
